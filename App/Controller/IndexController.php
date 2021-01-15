@@ -1,16 +1,21 @@
 <?php
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+use Example\Entity\User;
+
 /**
  * @path /
  */
 class IndexController
 {
     /**
-     * @route GET /
+     * @route POST /
+     * @param int[] $ids
      */
-    public function index() 
+    public function index($ids) 
     {
-        return '/';
+        \PhpRest\dump($ids);
+        return 'OK';
     }
 }

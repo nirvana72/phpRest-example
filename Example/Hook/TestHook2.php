@@ -1,5 +1,5 @@
 <?php
-namespace App\Hook\Example;
+namespace Example\Hook;
 
 use PhpRest\Controller\Hook\HookInterface;
 use Symfony\Component\HttpFoundation\Request;

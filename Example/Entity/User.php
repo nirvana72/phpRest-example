@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace Example\Entity;
 
 /**
  * 用户
@@ -12,19 +12,21 @@ class User
 {
     /**
      * 用户ID
+     * 
      * @field user_id@auto
-     * @rule min=1|max=100
-     * @var int
+     * @rule  min=1|max=100
+     * @var   int
      */
     public $id = 1;
 
     /**
      * 用户名
+     * 
      * @field user_name
-     * @rule required
-     * @var slug
+     * @rule  required
+     * @var   slug
      */
     public $name;
 
-    public $order;
+    public $age;
 }

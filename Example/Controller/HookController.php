@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Example;
+namespace Example\Controller;
 
 /**
  * 演示hook
@@ -17,6 +17,9 @@ class HookController
      */
     public function demo1() 
     {
+        // 执行顺序 
+        //  TestHook2
+        //  TestHook1
         return 'demo1';
     }
 
@@ -30,6 +33,10 @@ class HookController
      */
     public function demo2() 
     {
+        // 执行顺序 
+        //  TestHook2
+        //  TestHook1
+        //  TestHook3
         return 'demo2';
     }
 }
