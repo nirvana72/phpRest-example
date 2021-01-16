@@ -2,17 +2,15 @@
 namespace Example\Entity;
 
 /**
- * 随便什么模块的信息
+ * Info实体类
  */
 class Info
 {
-    /**
-     * @var int
-     */
-    public $id;
+    public $id = 1;
 
     /**
-     * @var string
+     * @var email
+     * @rule required
      */
-    public $desc;
+    public $desc = '';
 }

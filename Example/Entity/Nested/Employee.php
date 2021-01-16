@@ -1,5 +1,5 @@
 <?php
-namespace Example\Entity;
+namespace Example\Entity\Nested;
 
 /**
  * 企业员工

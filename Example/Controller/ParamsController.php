@@ -104,7 +104,7 @@ class ParamsController
             'p15' => $p15, // 4
             'p16' => $p16  // red
         ];
-        \PhpRest\dump($res);
+        \PhpRest\dump($res); // \PhpRest\dump方法来自 ThinkPhp框架，提供更友好的浏览器输出
         return 'OK';
     }
 

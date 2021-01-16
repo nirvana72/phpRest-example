@@ -1,5 +1,5 @@
 <?php
-namespace Example\Entity;
+namespace Example\Entity\Nested;
 
 /**
  * 企业订单
@@ -24,7 +24,16 @@ class Order
     /**
      * 信息
      * 
-     * @var Info
+     * @var OrderInfo
      */
-    public $info;
+    public $orderInfo;
+
+    /**
+     * 其它
+     * 
+     * 嵌套实体数组
+     * 
+     * @var Example\Entity\Nested\OrderOther[]
+     */
+    public $orderOthers;
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Example\Entity;
+namespace Example\Entity\Nested;
 
 /**
  * 企业
@@ -24,14 +24,16 @@ class Company
     /**
      * 员工
      * 
-     * @var Example\Entity\Employee
+     * @var Example\Entity\Nested\Employee
      */
     public $employee;
 
     /**
      * 订单
      * 
-     * @var Example\Entity\Order
+     * 订单中又嵌套子类
+     * 
+     * @var Example\Entity\Nested\Order
      */
     public $order;
 }

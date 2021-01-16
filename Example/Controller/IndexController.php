@@ -1,5 +1,8 @@
 <?php
 
+//  注解格式解析使用 phpDocumeontor
+//  https://docs.phpdoc.org/3.0/guide/getting-started/your-first-set-of-documentation.html#overview
+//
 // /**
 //  * 控制器摘要                            [可选, 默认 AbcController = abc]
 //  * 
@@ -20,7 +23,7 @@
 //      * @hook \App\Hook\TestHook3        [可选]
 //      * @param string $p1 参数描述p1      @see ParamsController.php
 //      * @param string $p2 参数描述p2
-//      * @return void                     [可选, 默认 { ret: 1, msg: ''} ]
+//      * @return void                     [可选]
 //      */
 //     public function demo1($p1, $p2) 
 //     {

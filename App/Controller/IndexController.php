@@ -10,12 +10,10 @@ use Example\Entity\User;
 class IndexController
 {
     /**
-     * @route POST /
-     * @param email[] $ids
+     * @route GET /
      */
-    public function index($ids) 
+    public function index() 
     {
-        \PhpRest\dump($ids);
         return 'OK';
     }
 }

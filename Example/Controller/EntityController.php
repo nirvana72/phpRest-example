@@ -99,10 +99,10 @@ class EntityController
      * demo4
      * 
      * @route POST /demo4
-     * @param \Example\Entity\User  $user  {@bind request.user}
-     * @param \Example\Entity\Order $order {@bind request.order}
+     * @param \Example\Entity\User $user {@bind request.user}
+     * @param \Example\Entity\Info $info {@bind request.info}
      */
-    public function demo4(User $user, Order $order) 
+    public function demo4(User $user, Order $info) 
     {
         //  客户端提交数据:
         //  {
@@ -111,27 +111,27 @@ class EntityController
         //         "name": "jack",
         //         "age": 18
         //     },
-        //     "order": {
+        //     "info": {
         //         "id": 1
-        //         "code": "xxx"
+        //         "desc": "xxx"
         //     }
         //  }
         // 
         // 因为默认 @bind request.xxx 同名参数名
         // 所以 {@bind request.user} 写不写都一样
-        // 除非  @param \Example\Entity\User $dog {@bind request.user}
+        // 除非  @param $dog {@bind request.user}
         \PhpRest\dump($user);
-        \PhpRest\dump($order);
+        \PhpRest\dump($info);
         return 'OK';
     }
 
     /**
      * demo5
      * 
-     * 实体类嵌套实体类
+     * 实体类嵌套实体类, 嵌套实体类数组, 嵌套基础类型数组
      * 
      * @route POST /demo5
-     * @param \Example\Entity\Company $company {@bind request}
+     * @param \Example\Entity\Nested\Company $company {@bind request}
      */
     public function demo5(Company $company) 
     {
@@ -146,7 +146,23 @@ class EntityController
         //     },
         //     "order": {
         //         "id": 1
-        //         "code": "1231214351"
+        //         "code": "1231214351",
+        //         "orderInfo": {
+        //             "id": 123,
+        //             "desc": "info desc"
+        //         },
+        //         "orderOthers": [
+        //              {
+        //                  "id": 1,
+        //                  "ips": ['127.0.0.1', '127.0.0.2', '127.0.0.3'],
+        //                  "nums": [1,2,3],
+        //              },
+        //              {
+        //                  "id": 2,
+        //                  "ips": ['127.0.1.1', '127.0.2.2'],
+        //                  "nums": [1,2,3,4,5,6],
+        //              }
+        //          ]
         //     }
         //  }
         // 
