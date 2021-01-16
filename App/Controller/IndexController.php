@@ -11,7 +11,7 @@ class IndexController
 {
     /**
      * @route POST /
-     * @param int[] $ids
+     * @param email[] $ids
      */
     public function index($ids) 
     {

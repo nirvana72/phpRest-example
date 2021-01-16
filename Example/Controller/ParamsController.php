@@ -58,6 +58,8 @@ class ParamsController
     /**
      * demo4
      * 
+     * 参数校验
+     * 
      * rules:
      * see https://github.com/vlucas/valitron#built-in-validation-rules
      *
@@ -74,15 +76,16 @@ class ParamsController
      * @param date      $p10  p10
      * @param time      $p11  p11
      * @param dateTime  $p12  p12
-     * @param string    $p13  p13 {@rule length=6}
-     * @param int       $p14  p14 {@rule min=1|max=6}
-     * @param string    $p15  p15 {@rule in=red,blue,yellow}
+     * @param ip        $p13  p13
+     * @param string    $p14  p14 {@rule length=6}
+     * @param int       $p15  p15 {@rule min=1|max=6}
+     * @param string    $p16  p16 {@rule in=red,blue,yellow}
      */
-    public function demo4($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15) {
+    public function demo4($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16) {
 
-        // @param integer  $p3  p3   ===  @param int    $p3  p3  {@rule integer}
-        // @param alpha    $p7  p7   ===  @param string $p7  p7  {@rule alpha}
-        // @param dateTime $p12 p12  ===  @param string $p12 p12 {@rule dateFormat=Y-m-d H:i:s}
+        // @param integer  $p3  p3   等同于  @param int    $p3  p3  {@rule integer}
+        // @param alpha    $p7  p7   等同于  @param string $p7  p7  {@rule alpha}
+        // @param dateTime $p12 p12  等同于  @param string $p12 p12 {@rule dateFormat=Y-m-d H:i:s}
         $res = [
             'p1' => $p1, // abc
             'p2' => $p2, // 1
@@ -96,23 +99,44 @@ class ParamsController
             'p10' => $p10, // 2020-11-11
             'p11' => $p11, // 11:11:11
             'p12' => $p12, // 2020-11-11 11:11:11
-            'p13' => $p13, // aaaaaa
-            'p14' => $p14, // 4
-            'p15' => $p15  // red
+            'p13' => $p13, // 127.0.0.1
+            'p14' => $p14, // aaaaaa
+            'p15' => $p15, // 4
+            'p16' => $p16  // red
         ];
         \PhpRest\dump($res);
         return 'OK';
     }
 
     /**
+     * demo5
+     * 
+     * 数组参数绑定
+     * 
+     * @route POST /demo5
+     * @param int[] $ary ary
+     */
+    public function demo5($ary) 
+    {
+        // @param string[] $ary ary  必需提交一个数组
+        // @param int[]    $ary ary  必需提交一个全是整形的数组
+        // @param ip[]     $ary ary  必需提交一个全是合法IP的数组
+        // @param data[]   $ary ary  必需提交一个全是合法日期字符串的数组
+        // ... 
+        \PhpRest\dump($ary);
+        return 'OK';
+    }
+
+    /**
      * 直接绑定 Request 对象
      * 
-     * @route GET /demo5
+     * 别忘了 use Symfony\Component\HttpFoundation\Request;
+     * Request: https://symfony.com/doc/current/components/http_foundation.html#request
+     * 
+     * @route GET /demo6
      */
-    public function demo5(Request $request) 
+    public function demo6(Request $request) 
     {
-        // Request 为 Symfony\Component\HttpFoundation\Request
-        // 参考 https://symfony.com/doc/current/components/http_foundation.html#request
         return $request->query->all();
     }
 }

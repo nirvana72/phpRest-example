@@ -7,7 +7,7 @@ use Example\Entity\Order;
 use Example\Entity\User;
 
 /**
- * 实体类入参绑定
+ * 请求数据绑定实体类
  * 
  * @path /entity
  */
@@ -35,14 +35,14 @@ class EntityController
         // 2. @param 实体类型 $xxx
         // 
         // 任何一处指定后, 方法参数都为一个实体类型
-        // 否则, 虽然也能绑定request 数据, 但得到的是一个数组
+        // 否则, 虽然也能绑定request 数据, 但得到的是一个关联数组
         // 
-        // 推荐使用方法 1. 绑定
+        // 推荐使用方法 1. 绑定, 当然更推荐两个地方都写，增加代码可读性 :)
         // 因为直接在 function 上指定, PHP语言特性会直接识别为一个实体类, 
-        // 不会再解析 @param 中的内容, @param 中写不写, 或写不写全命名空间都无所谓, 只会判断描述是否一至
+        // 不会再解析 @param 中的内容, @param 中写不写, 或写不写全命名空间都无所谓, 只会判断类型是否一至
         // 否则若只在 @param 中指定的话, 会多执行一个解析过程
         // 
-        // 如果只在 @param 中指定，也推荐写全命名空间, 这样只判断 class_exists 
+        // 如果只在 @param 中指定，也推荐写全命名空间, 这样只有一个判断 class_exists('\Entity\User')
         // 否则如果只写 User, 还会多一个结合上下文的反射命名空间过程
         // 
         // 实体类参数验证规则查看 Example/Entity/User.php
@@ -119,7 +119,7 @@ class EntityController
         // 
         // 因为默认 @bind request.xxx 同名参数名
         // 所以 {@bind request.user} 写不写都一样
-        // 除非  @param \Example\Entity\User $xxx {@bind request.user}
+        // 除非  @param \Example\Entity\User $dog {@bind request.user}
         \PhpRest\dump($user);
         \PhpRest\dump($order);
         return 'OK';
@@ -157,7 +157,7 @@ class EntityController
     /**
      * demo6
      * 
-     * 提交数组绑定到实体类数组, 使用场景通常应该都是POST吧
+     * 绑定到实体类数组, 使用场景通常应该都是POST吧
      * 
      * @route POST /demo6
      * @param \Example\Entity\User[] $users
@@ -185,15 +185,6 @@ class EntityController
         //     ]
         // }
         // 
-
-        // 如果是基础数据类型的数组
-        // @param int[]    $ids
-        // @param string[] $names
-        // 其实基础数据类型数组写不写[] 都一样，因为PHP本身就是弱类型
-        // 但是写上 [], 会上代码可读性更高一点
-        // 
-        // * 基础数据类型数组参数不支持验证规则
-        // * 因为判断太烦了，要多写好多代码，还是在业务代码中判断吧
         \PhpRest\dump($users);
         return 'OK';
     }
