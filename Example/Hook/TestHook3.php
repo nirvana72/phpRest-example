@@ -1,7 +1,7 @@
 <?php
 namespace Example\Hook;
 
-use PhpRest\Controller\Hook\HookInterface;
+use PhpRest\Hook\HookInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

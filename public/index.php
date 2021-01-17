@@ -9,10 +9,15 @@ require '/workspace/phpRest/vendor/autoload.php';
 $app = Application::createDefault(__DIR__.'/../config/config.php');
 
 // $app->get('\PhpRest\Test\ControllerBuildTest')->test1(); exit;
-// $app->get('\PhpRest\Test\EntityBuildTest')->test2(); exit;
+// $app->get('\PhpRest\Test\EntityBuildTest')->test4(); exit;
 
 // 加载路由
 $app->loadRoutesFromPath( __DIR__.'/../App/Controller', 'App\\Controller');
+
+// 加载全局Hook
+$app->addGlobalHooks([
+    \PhpRest\Hook\CorsHook::class
+]);
 
 // 执行请求
 $app->dispatch();
