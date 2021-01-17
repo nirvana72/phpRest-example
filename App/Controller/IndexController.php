@@ -1,8 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Example\Entity\User;
+use PhpRest\ApiResult;
 
 /**
  * @path /
@@ -14,6 +13,6 @@ class IndexController
      */
     public function index() 
     {
-        return 'OK';
+        return ApiResult::success('OK');
     }
 }
