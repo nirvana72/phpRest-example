@@ -204,4 +204,27 @@ class EntityController
         \PhpRest\dump($users);
         return 'OK';
     }
+
+    /**
+     * demo7
+     * 
+     * 实体类支持继承
+     * 
+     * @route POST /demo6
+     * @param \Example\Entity\Inherit\ObjSon $son
+     */
+    public function demo7($son) 
+    {
+        //  客户端提交数据:
+        //   {
+        //     "son": {
+        //         "id": 1,
+        //         "name": "aaa",
+        //         "age": 16
+        //     }
+        // }
+        // 
+        \PhpRest\dump($son);
+        return 'OK';
+    }
 }

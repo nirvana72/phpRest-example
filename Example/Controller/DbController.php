@@ -1,16 +1,4 @@
 <?php
-
-// DROP TABLE IF EXISTS `tmp_user`;
-// CREATE TABLE `tmp_user`  (
-//   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-//   `account` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-//   `nick_name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-//   `password` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-//   `phone` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-//   `write_time` char(19) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-//   PRIMARY KEY (`user_id`) USING BTREE
-// ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
 namespace Example\Controller;
 
 use PhpRest\ApiResult;

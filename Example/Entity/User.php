@@ -18,6 +18,8 @@
 //      * 字段描述                      [可选]
 //      *
 //      * @field user_id               [可选 指定字段名, 默认等于变量名, 规则同 @table]
+//      * @pk                          [可选 指定字段为主键, ORM update|delete 时拼接 where 条件]
+//      * @auto                        [可选 指定字段为自动增长, ORM insert 时过滤插入]
 //      * @var int                     [可选 指定类型, 格式同参数说明的 @param]
 //      * @rule min=1|max=100          [可选 指定验证规则, 格式同参数说明的 @rule]
 //      */
