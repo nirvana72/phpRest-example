@@ -23,7 +23,7 @@
 //      * @hook \App\Hook\TestHook3        [可选]
 //      * @param string $p1 参数描述p1      @see ParamsController.php
 //      * @param string $p2 参数描述p2
-//      * @return void                     [可选]
+//      * @return void                     [可选, 主要用在输出swagger文档, 与业务逻辑无关]
 //      */
 //     public function demo1($p1, $p2) 
 //     {

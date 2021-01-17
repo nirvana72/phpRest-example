@@ -3,7 +3,7 @@
 // phpRest 支持最基本的ORM操作
 
 // 如果业务够简单(单表), 利用ORM确实可以少写很多代码, 看上去也更优雅
-// 但是PHP特点就是没什么必要重度使用ORM
+// 但是PHP特点没什么必要重度使用ORM
 
 // 使用注意
 // 1.  orm 实体对象只能通过 $app->make() 创建， new 出来的无法生效
@@ -81,7 +81,7 @@ class OrmController
     /**
      * update
      * 
-     * @route PUT /{userId:\d+}
+     * @route PUT /
      * @param User $user
      */
     public function update(User $user) 
@@ -97,6 +97,7 @@ class OrmController
      */
     public function delete($userId) 
     { 
+        $user = $this->app->make(User::class);
         $ret = $user->delete(['user_id' => $userId]);
         return ApiResult::assert($res->rowCount() === 1, '删除失败');
     }
