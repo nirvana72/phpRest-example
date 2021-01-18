@@ -1,4 +1,7 @@
 <?php
+
+use PhpRest\Exception\ExceptionHandlerInterface;
+use PhpRest\Render\ResponseRenderInterface;
 use Psr\Container\ContainerInterface;
 use PhpRest\Utils\EnvHelper as Env;
 
@@ -35,15 +38,20 @@ return [
     ],
 
     /************************************************************************************
+      异常输出类
+    /************************************************************************************/
+    ExceptionHandlerInterface::class => \DI\create(\App\Exception\ExceptionHandler::class),
+
+    /************************************************************************************
       DEBUG     (100)  : 详细的debug信息。
       INFO      (200)  : 关键事件。
-      NOTICE    (250)  : 普通但是重要的事件。
+      NOTICE    (250)  : 普通但是重要的事件。   
       WARNING   (300)  : 出现非错误的异常。
       ERROR     (400)  : 运行时错误，但是不需要立刻处理。
       CRITICA   (500)  : 严重错误。
       EMERGENCY (600)  : 系统不可用
     ************************************************************************************/
-    \Psr\Log\LoggerInterface::class => DI\factory(function (ContainerInterface $c) {
+    \Psr\Log\LoggerInterface::class => \DI\factory(function (ContainerInterface $c) {
         // 默认日志路径在此修改  
         $logPath = $_SERVER['DOCUMENT_ROOT'] . '/../logs/' . date("Y-m-d") . '.txt';
         $dateFormat = "Y-m-d H:i:s";
