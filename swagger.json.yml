@@ -1,0 +1,1028 @@
+swagger: '2.0'
+info:
+  title: feight - develop
+  description: ''
+  version: ''
+host: www.phpboot.local
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /admin/company/list:
+    get:
+      tags:
+        - 企业信息
+      summary: 企业列表
+      description: ''
+      parameters:
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        companyId:
+                          type: integer
+                        companyName:
+                          type: string
+                        phone:
+                          type: string
+                        createTime:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/company/:
+    post:
+      tags:
+        - 企业信息
+      summary: 新建企业
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              companyName:
+                type: string
+              phone:
+                type: string
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  '/admin/company/{id}':
+    put:
+      tags:
+        - 企业信息
+      summary: 修改企业
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: path
+          name: id
+          description: companyId
+        - schema:
+            type: object
+            properties:
+              companyName:
+                type: string
+              phone:
+                type: string
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+    delete:
+      tags:
+        - 企业信息
+      summary: 删除企业
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: path
+          name: id
+          description: companyId
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/faker/make_fake_data:
+    post:
+      tags:
+        - 开发测试
+      summary: 初始化测试数据
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              companyRandom:
+                type: string
+              userRandom:
+                type: string
+              salaryRandom:
+                type: string
+              cmd:
+                type: string
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/faker/make_fake_excel:
+    get:
+      tags:
+        - 开发测试
+      summary: 生成随机Excel数据
+      description: ''
+      parameters:
+        - type: integer
+          maximum: 1000
+          minimum: 1
+          required: false
+          default: 10
+          in: query
+          name: len
+          description: 'len {@v min:1|max:1000}'
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/order/company_data:
+    get:
+      tags:
+        - 历史业务
+      summary: 企业订单
+      description: ''
+      parameters:
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: companyId
+          description: companyId
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: batchId
+          description: batchId
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        batchId:
+                          type: string
+                        companyId:
+                          type: integer
+                        userId:
+                          type: integer
+                        salary:
+                          type: integer
+                        companyName:
+                          type: string
+                        userName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/order/company_data_summary:
+    get:
+      tags:
+        - 历史业务
+      summary: 企业订单
+      description: ''
+      parameters:
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: batchId
+          description: batchId
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        companyId:
+                          type: integer
+                        userCount:
+                          type: integer
+                        salarySum:
+                          type: integer
+                        companyName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/order/company_task:
+    get:
+      tags:
+        - 历史业务
+      summary: 企业任务
+      description: ''
+      parameters:
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: companyId
+          description: companyId
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: batchId
+          description: batchId
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        batchId:
+                          type: string
+                        companyId:
+                          type: integer
+                        userId:
+                          type: integer
+                        reward:
+                          type: integer
+                        realReward:
+                          type: integer
+                        distance:
+                          type: integer
+                        minute:
+                          type: integer
+                        startPointName:
+                          type: string
+                        startPointLng:
+                          type: string
+                        endPointName:
+                          type: string
+                        endPointLng:
+                          type: string
+                        writeDate:
+                          type: string
+                        companyName:
+                          type: string
+                        userName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/company_data:
+    get:
+      tags:
+        - 本月业务
+      summary: 获取企业提供的数据列表
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: query
+          name: companyId
+          description: 'companyId {@v required}'
+        - type: string
+          required: false
+          default: ''
+          in: query
+          name: searchValue
+          description: searchValue
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: integer
+                        userName:
+                          type: string
+                        companyId:
+                          type: integer
+                        salary:
+                          type: integer
+                        phone:
+                          type: string
+                        idCard:
+                          type: string
+                        bankCard:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/company_data_summary:
+    get:
+      tags:
+        - 本月业务
+      summary: 获取企业提供的数据汇总
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        companyId:
+                          type: integer
+                        userCount:
+                          type: integer
+                        salarySum:
+                          type: integer
+                        companyName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/import_company_data:
+    post:
+      tags:
+        - 本月业务
+      summary: 企业数据导入
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              companyId:
+                type: integer
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  '/admin/orderTodo/company_data/{id}':
+    delete:
+      tags:
+        - 本月业务
+      summary: 删除企业数据
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: path
+          name: id
+          description: 'companyId {@v required}'
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/make_task:
+    post:
+      tags:
+        - 本月业务
+      summary: 生成任务
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/mix_balance:
+    post:
+      tags:
+        - 本月业务
+      summary: 调配无法匹配的企业余额
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/verify_task:
+    post:
+      tags:
+        - 本月业务
+      summary: 验证任务数据是否正确
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/task:
+    get:
+      tags:
+        - 本月业务
+      summary: 获取任务列表
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: query
+          name: companyId
+          description: 'companyId {@v required}'
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        companyId:
+                          type: integer
+                        userId:
+                          type: integer
+                        reward:
+                          type: integer
+                        realReward:
+                          type: integer
+                        distance:
+                          type: integer
+                        minute:
+                          type: integer
+                        startPointName:
+                          type: string
+                        startPointLng:
+                          type: string
+                        endPointName:
+                          type: string
+                        endPointLng:
+                          type: string
+                        writeDate:
+                          type: string
+                        userName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/task_summary:
+    get:
+      tags:
+        - 本月业务
+      summary: 获取任务数据汇总
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        companyId:
+                          type: integer
+                        taskCount:
+                          type: integer
+                        rewardSum:
+                          type: integer
+                        companyName:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  '/admin/orderTodo/user_info/{id}':
+    get:
+      tags:
+        - 本月业务
+      summary: 用户详细信息
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: path
+          name: id
+          description: id
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  userName:
+                    type: string
+                  salary:
+                    type: integer
+                  phone:
+                    type: string
+                  idCard:
+                    type: string
+                  bankCard:
+                    type: string
+                  companyName:
+                    type: string
+                  task:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      afterCompanyId:
+                        type: integer
+                      reward:
+                        type: integer
+                      realReward:
+                        type: integer
+                      distance:
+                        type: integer
+                      minute:
+                        type: integer
+                      startPointName:
+                        type: string
+                      endPointName:
+                        type: string
+                      writeDate:
+                        type: string
+                      companyName:
+                        type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/orderTodo/confirm_data:
+    post:
+      tags:
+        - 本月业务
+      summary: 正式提交数据
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              batchId:
+                type: string
+              step:
+                type: integer
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/route/list:
+    get:
+      tags:
+        - 线路
+      summary: 线路列表
+      description: ''
+      parameters:
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        reward:
+                          type: integer
+                        distance:
+                          type: integer
+                        minute:
+                          type: integer
+                        startPointName:
+                          type: string
+                        startPointLng:
+                          type: string
+                        endPointName:
+                          type: string
+                        endPointLng:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/route/random_add:
+    post:
+      tags:
+        - 线路
+      summary: 生成随机线路
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              len:
+                type: integer
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  '/admin/route/{id}':
+    delete:
+      tags:
+        - 线路
+      summary: 删除企业线路
+      description: ''
+      parameters:
+        - type: integer
+          required: true
+          in: path
+          name: id
+          description: id
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/route/update_info:
+    put:
+      tags:
+        - 线路
+      summary: 更新线路信息
+      description: ''
+      parameters:
+        - schema:
+            type: object
+            properties:
+              lng:
+                type: string
+              lat:
+                type: string
+              distance:
+                type: integer
+          name: body
+          in: body
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+      schemes:
+        - http
+      deprecated: false
+  /admin/user/list:
+    get:
+      tags:
+        - 用户
+      summary: 用户列表
+      description: ''
+      parameters:
+        - type: integer
+          required: false
+          default: 1
+          in: query
+          name: page
+          description: 页码
+        - type: integer
+          required: false
+          default: 20
+          in: query
+          name: limit
+          description: 分量
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              ret:
+                type: integer
+              msg:
+                type: string
+              data:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: integer
+                          default: 1
+                        userName:
+                          type: string
+                          default: "string - afagwagag"
+                        phone:
+                          type: string
+                        idCard:
+                          type: string
+                        bankCard:
+                          type: string
+                        batchId:
+                          type: string
+      schemes:
+        - http
+      deprecated: false
+definitions: []
+securityDefinitions:
+  token:
+    type: apiKey
+    in: header
+    name: auth-token
