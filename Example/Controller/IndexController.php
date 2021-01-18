@@ -36,10 +36,17 @@ namespace Example\Controller;
 class IndexController
 {
     /**
+     * @Inject
+     * @var \Psr\Log\LoggerInterface
+     */  
+    private $logger;
+
+    /**
      * @route GET /demo1
      */
     public function demo1() 
     {
+        $this->logger->info("Adding a new user", ['username' => 'monolog']);
         return 'ok';
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 // 数据库操作，无非就是各种花式拼接SQL， 就看谁拼的更优雅
-// GITHUB上太多现成的轮子了， 也没必要自己再造轮子， 自己造的也不一定会比别人好
+// github上优秀的轮子太多了， 必要重复造轮子， 自己造的也不一定会比别人好
 // 所以 phpRest 使用 \Medoo\Medoo
 
-// see https://medoo.in/api/new
+// see https://medoo.in/doc
 
 namespace Example\Controller;
 
