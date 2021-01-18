@@ -15,11 +15,18 @@ class IndexController
     private $logger;
 
     /**
+     * @Inject("App.host")
+     * @var string
+     */  
+    private $host;
+
+    /**
      * @route GET /
      */
     public function index() 
     {
-        $this->logger->error("Adding {username} a new user", ['username' => 'Seldaek']);
+        echo $this->host;
+        // $this->logger->error("Adding {username} a new user", ['username' => 'Seldaek']);
         return ApiResult::success('OK');
     }
 }

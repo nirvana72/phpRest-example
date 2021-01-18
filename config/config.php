@@ -1,20 +1,32 @@
 <?php
 use Psr\Container\ContainerInterface;
+use PhpRest\Utils\EnvHelper as Env;
+
+Env::loadFile($_SERVER['DOCUMENT_ROOT'] . '/../.env');
 
 return [
-    'App.name' => 'example',
+    'App.name'    => Env::get('app.name'),
+    'App.host'    => Env::get('app.host'),
+    'App.env'     => Env::get('app.env'),
+    'App.cronip'  => Env::get('app.cronip'), // 定时任务触发请求服务器IP
 
-    'env' => 'develop',
+    /************************************************************************************
+      JWT
+    ************************************************************************************/
+    'jwt' => [
+        'name'   => Env::get('jwt.dbname'),
+        'secret' => Env::get('jwt.secret')
+    ],
     
     /************************************************************************************
       Mysql
     ************************************************************************************/
     'database' => [ // see https://medoo.in/doc
         'database_type' => 'mysql',
-        'database_name' => 'freight-saas',
-        'server' => '172.18.0.2',
-        'username' => 'root',
-        'password' => '123456',
+        'database_name' => Env::get('database.dbname'),
+        'server'   => Env::get('database.host'),
+        'username' => Env::get('database.username'),
+        'password' => Env::get('database.password'),
         'option' => [  // see https://www.php.net/manual/zh/book.pdo.php
             \PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             \PDO::ATTR_EMULATE_PREPARES => false,
