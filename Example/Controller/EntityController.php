@@ -74,35 +74,14 @@ class EntityController
         return 'OK';
     }
 
-
     /**
      * demo3
      * 
      * @route POST /demo3
-     * @param \Example\Entity\User $user {@bind request}
-     */
-    public function demo3(User $user) 
-    {
-        //  客户端提交数据:
-        //  {
-        //      "id": 1
-        //      "name": "jack",
-        //      "age": 18
-        //  }
-        // 
-        // 如果希望把整个 request 提交对象绑定成一个实体 需要 {@bind request}
-        \PhpRest\dump($user);
-        return 'OK';
-    }
-
-    /**
-     * demo4
-     * 
-     * @route POST /demo4
      * @param \Example\Entity\User $user {@bind request.user}
      * @param \Example\Entity\Info $info {@bind request.info}
      */
-    public function demo4(User $user, Order $info) 
+    public function demo3(User $user, Order $info) 
     {
         //  客户端提交数据:
         //  {
@@ -126,14 +105,14 @@ class EntityController
     }
 
     /**
-     * demo5
+     * demo4
      * 
      * 实体类嵌套实体类, 嵌套实体类数组, 嵌套基础类型数组
      * 
-     * @route POST /demo5
+     * @route POST /demo4
      * @param \Example\Entity\Nested\Company $company {@bind request}
      */
-    public function demo5(Company $company) 
+    public function demo4(Company $company) 
     {
         //  客户端提交数据:
         //  {
@@ -171,14 +150,14 @@ class EntityController
     }
 
     /**
-     * demo6
+     * demo5
      * 
      * 绑定到实体类数组, 使用场景通常应该都是POST吧
      * 
-     * @route POST /demo6
+     * @route POST /demo5
      * @param \Example\Entity\User[] $users
      */
-    public function demo6($users) 
+    public function demo5($users) 
     {
         //  客户端提交数据:
         //   {
@@ -206,14 +185,14 @@ class EntityController
     }
 
     /**
-     * demo7
+     * demo6
      * 
      * 实体类支持继承
      * 
      * @route POST /demo6
      * @param \Example\Entity\Inherit\ObjSon $son
      */
-    public function demo7($son) 
+    public function demo6($son) 
     {
         //  客户端提交数据:
         //   {

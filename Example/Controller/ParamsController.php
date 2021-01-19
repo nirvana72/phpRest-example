@@ -56,8 +56,6 @@ class ParamsController
     }
 
     /**
-     * demo4
-     * 
      * 参数校验
      * 
      * rules:

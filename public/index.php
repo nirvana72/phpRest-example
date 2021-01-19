@@ -31,7 +31,7 @@ if (Env::get('app.env') !== 'production') {
             $api_key['type'] = 'apiKey';
             $api_key['in'] = 'header';
             $api_key['name'] = Env::get('jwt.name');
-            $swagger->securityDefinitions['token'] = $api_key;
+            // $swagger['securityDefinitions']['token'] = $api_key;
         }
     );
 }
