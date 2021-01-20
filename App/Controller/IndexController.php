@@ -20,14 +20,15 @@ class IndexController
      */  
     private $host;
 
-    // /**
-    //  * @route GET /
-    //  * @param numeric $p1 电子邮箱
-    //  * @param dateTime $p2
-    //  */
-    // public function index($p1, $p2) 
-    // {
-    //     // $this->logger->error("Adding {username} a new user", ['username' => 'Seldaek']);
-    //     return ApiResult::success('OK');
-    // }
+    /**
+     * @route GET /
+     * @param string $p1
+     * @param string $p2
+     * @return _\Example\Entity\User[]
+     */
+    public function index($p1, $p2) 
+    {
+        // $this->logger->error("Adding {username} a new user", ['username' => 'Seldaek']);
+        return ApiResult::success('OK');
+    }
 }

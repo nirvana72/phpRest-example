@@ -8,10 +8,10 @@ use PhpRest\Utils\EnvHelper as Env;
 Env::loadFile($_SERVER['DOCUMENT_ROOT'] . '/../.env');
 
 return [
-    'App.name'    => Env::get('app.name'),
-    'App.host'    => Env::get('app.host'),
-    'App.env'     => Env::get('app.env'),
-    'App.cronip'  => Env::get('app.cronip'), // 定时任务触发请求服务器IP
+    'App.name'   => Env::get('app.name'),
+    'App.host'   => Env::get('app.host'),
+    'App.env'    => Env::get('app.env'),
+    'App.cronip' => Env::get('app.cronip'), // 定时任务触发请求服务器IP
 
     /************************************************************************************
       JWT
@@ -25,9 +25,9 @@ return [
       swagger
     ************************************************************************************/
     'swagger' => [
-        'author' => 'nijia',
-        'email'  => '15279663@qq.com',
-        'schemes'=> ['http', 'https'],
+        'author'  => 'nijia',
+        'email'   => '15279663@qq.com',
+        'schemes' => ['http', 'https'],
         'version' => '1.0.1'
     ],
     
@@ -53,6 +53,7 @@ return [
     ExceptionHandlerInterface::class => \DI\create(\App\Exception\ExceptionHandler::class),
 
     /************************************************************************************
+      日志输出
       DEBUG     (100)  : 详细的debug信息。
       INFO      (200)  : 关键事件。
       NOTICE    (250)  : 普通但是重要的事件。   

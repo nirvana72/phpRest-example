@@ -39,6 +39,9 @@ class User
 {
     public $id = 1;
 
+    /**
+     * 姓名
+     */
     public $name;
 
     /**
