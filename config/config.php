@@ -27,7 +27,7 @@ return [
     'swagger' => [
         'author'  => 'nijia',
         'email'   => '15279663@qq.com',
-        'schemes' => ['http', 'https'],
+        'schemes' => ['http'],
         'version' => '1.0.1'
     ],
     

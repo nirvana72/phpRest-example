@@ -1,6 +1,7 @@
 <?php
 
 // phpRest 支持最基本的ORM操作
+// Orm 实体类参见 \Example\Entity\Orm\User.php
 
 // 如果业务够简单(单表), 利用ORM确实可以少写很多代码, 看上去也更优雅
 // 但是PHP特点没什么必要重度使用ORM
@@ -9,7 +10,7 @@
 // 1.  orm 实体对象只能通过 $app->make() 创建， new 出来的无法生效
 //     因为orm对象内部需要注入一些必要对象
 
-// 2.  以下代码可以正常插入数据库， 但无法使用orm实体的验证规则
+// 2.  以下代码两种写法都可以正常插入数据库， 但 1 无法使用orm实体的验证规则
 //     $user = $this->app->make(User::class);
 //     $user->userId    = 1;
 //     $user->account   = 'nirvana72';
@@ -87,7 +88,7 @@ class OrmController
     public function update(User $user) 
     { 
         $ret = $user->update();
-        return ApiResult::assert($ret->rowCount() === 1, '保存失败');
+        return ApiResult::assert($ret->rowCount() === 1, ['', '保存失败']);
     }
 
     /**
@@ -99,6 +100,6 @@ class OrmController
     { 
         $user = $this->app->make(User::class);
         $ret = $user->delete(['user_id' => $userId]);
-        return ApiResult::assert($res->rowCount() === 1, '删除失败');
+        return ApiResult::assert($res->rowCount() === 1, ['', '删除失败']);
     }
 }

@@ -17,9 +17,8 @@ class ExceptionHandler implements ExceptionHandlerInterface
      */
     public function render(\Throwable $e)
     {
-        $code = 0 - abs($e->getCode()); // 保证返回值 <= 0
-        $result = new ApiResult($code, $e->getMessage());
-
+        $ret = 0 - abs($e->getCode()); // 保证返回值 <= 0
+        $result = new ApiResult($ret, $e->getMessage());
         $status = Response::HTTP_INTERNAL_SERVER_ERROR; // 500
 
         if($e instanceof BadArgumentException){
@@ -43,11 +42,12 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $line = $e->getLine();
         }
 
-        $documentRoot = str_replace('/public', '', $_SERVER['DOCUMENT_ROOT']);
-        $file = str_replace($documentRoot, '', $file);
+        $wwwRoot = str_replace('/public', '', $_SERVER['DOCUMENT_ROOT']);
+        $file = str_replace($wwwRoot, '', $file);
         $result->data = "{$file} - line:{$line}";
 
         $message = json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        
         return new Response($message, $status, ['Content-Type'=>'application/json']);
     }
 }

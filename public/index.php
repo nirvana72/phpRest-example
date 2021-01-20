@@ -17,7 +17,7 @@ $app->scanRoutesFromPath( __DIR__.'/../App/Controller', 'App\Controller');
 
 // 跨域支持
 $app->addGlobalHooks([ 
-    \PhpRest\Hook\CorsHook::class 
+    \PhpRest\Hook\CrosHook::class 
 ]);
 
 // swagger

@@ -1,7 +1,7 @@
 <?php
 
 // 数据库操作，无非就是各种花式拼接SQL， 就看谁拼的更优雅
-// github上优秀的轮子太多了， 必要重复造轮子， 自己造的也不一定会比别人好
+// github上优秀的轮子太多了， 没必要重复造轮子
 // 所以 phpRest 使用 \Medoo\Medoo
 
 // see https://medoo.in/doc
@@ -47,7 +47,7 @@ class DbController
     {        
         $start = ($page-1) * $limit;
         $rows = $this->db->select('tmp_user', '*', ['limit' => [$start, $limit]]);
-        $rows = \PhpRest\camelizeArrayKey($rows);
+        $rows = \PhpRest\camelizeArrayKey($rows); // 把数据库里的下划线规则转成驼峰规则
         return ApiResult::success($rows);
     }
 
@@ -70,7 +70,7 @@ class DbController
             'write_time' => date('Y-m-d H:i:s')
         ];
         $res = $this->db->insert('tmp_user', $data);
-        return ApiResult::assert($res->rowCount() === 1, '添加失败');
+        return ApiResult::assert($res->rowCount() === 1, ['', '添加失败']);
     }
 
     /**
@@ -99,6 +99,6 @@ class DbController
     public function delete($userId) 
     { 
         $res = $this->db->delete('tmp_user', ['user_id' => $userId]);
-        return ApiResult::assert($res->rowCount() === 1, '删除失败');
+        return ApiResult::assert($res->rowCount() === 1, ['', '删除失败']);
     }
 }

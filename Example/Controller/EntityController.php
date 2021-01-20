@@ -1,4 +1,7 @@
 <?php
+
+// 实体类规范查看 Example/Entity/User.php
+
 namespace Example\Controller;
 
 use Example\Entity\Company;
@@ -44,8 +47,7 @@ class EntityController
         // 
         // 如果只在 @param 中指定，也推荐写全命名空间, 这样只有一个判断 class_exists('\Entity\User')
         // 否则如果只写 User, 还会多一个结合上下文的反射命名空间过程
-        // 
-        // 实体类参数验证规则查看 Example/Entity/User.php
+        
         \PhpRest\dump($user);
         return 'OK';
     }
@@ -187,7 +189,7 @@ class EntityController
     /**
      * demo6
      * 
-     * 实体类支持继承
+     * 实体类支持继承 ObjSon 继承于 ObjFather
      * 
      * @route POST /demo6
      * @param \Example\Entity\Inherit\ObjSon $son
