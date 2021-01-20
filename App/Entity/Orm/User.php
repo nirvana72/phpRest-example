@@ -1,7 +1,7 @@
 <?php
 
-// DROP TABLE IF EXISTS `tmp_user`;
-// CREATE TABLE `tmp_user`  (
+// DROP TABLE IF EXISTS `t_user`;
+// CREATE TABLE `t_user`  (
 //   `user_id` int(11) NOT NULL AUTO_INCREMENT,
 //   `account` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 //   `nick_name` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
