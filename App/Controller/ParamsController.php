@@ -1,5 +1,5 @@
 <?php
-namespace Example\Controller;
+namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 

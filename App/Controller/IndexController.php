@@ -33,17 +33,13 @@
 
 namespace App\Controller;
 
-use PhpRest\ApiResult;
-
 class IndexController
 {
     /**
      * @route GET /demo1
-     * @param $p1
-     * @param $p2
      */
-    public function demo1($p1, $p2) 
+    public function demo1() 
     {
-        return ApiResult::success($p1);
+        return 'ok';
     }
 }
