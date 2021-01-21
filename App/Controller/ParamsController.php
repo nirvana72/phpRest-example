@@ -34,9 +34,9 @@ class ParamsController
      * demo3
      * 
      * @route GET /demo3/{id}
-     * @param string $token token {@bind headers.token}
+     * @param string $token token {@bind headers.Authorization}
      */
-    public function demo3($id, $token) 
+    public function demo3(int $id, $token) 
     {
         // path参数 $id 默认是字符串
         // 如果要验证类型可以在下面加一行(注意参数必需同名)
@@ -136,7 +136,9 @@ class ParamsController
         // @param int[]    $ary ary  必需提交一个全是整形的数组
         // @param ip[]     $ary ary  必需提交一个全是合法IP的数组
         // @param data[]   $ary ary  必需提交一个全是合法日期字符串的数组
-        // ... 
+        // ...
+        
+        // function(array $ary) 等同于 @param string[], 可以省略 @param
         return ApiResult::success($ary);
     }
 
