@@ -42,8 +42,9 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $line = $e->getLine();
         }
 
-        $wwwRoot = str_replace('/public', '', $_SERVER['DOCUMENT_ROOT']);
-        $file = str_replace($wwwRoot, '', $file);
+        // $wwwRoot = str_replace('/public', '', $_SERVER['DOCUMENT_ROOT']);
+        // $file = str_replace($wwwRoot, '', $file);
+        $file = end(explode('/', $file));
         $result->data = "{$file} - line:{$line}";
 
         $message = json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
