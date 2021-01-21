@@ -94,10 +94,11 @@ class ParamsController
         //
         // 如果只写 function(int $p1) 也会添加$p1的integer 验证规则,所以
         //  @param int $p1
-        //  function($p1)
+        //  @param string[] $p2
+        //  function($p1, $p2)
         //
-        //  function(int $p1)
-        // 两种写法是一样的效果， 但是只支持 int, float 自动添加验证规则
+        //  function(int $p1, array $p2)
+        // 两种写法是一样的效果， 但是只支持 int, float, array 自动添加验证规则
         $res = [
             'p1' => $p1, // abc
             'p2' => $p2, // 1

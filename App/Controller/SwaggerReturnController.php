@@ -4,17 +4,17 @@
 // 那么可以增加一个 @return 注解, 展示API的返回说明
 // @return 注解只对Swagger文档生效，与业务逻辑没有任何关联
 //
-// * 返回josn需要注意的地方
+// * 返回josn字符串需要注意的地方
 //   必须用双引号
 //   必须是个格式正式的json字符串
 //   检查中文 : 中文 ， 经常会忽略
 
-namespace Example\Controller;
+namespace App\Controller;
 
 /**
  * @path /swagger
  */
-class SwaggerRetrunController
+class SwaggerReturnController
 {
     /**
      * @route POST /demo1
@@ -140,7 +140,7 @@ class SwaggerRetrunController
 
     /**
      * @route GET /demo8
-     * @return \Example\Entity\User
+     * @return \App\Entity\User
      */
     public function demo8() 
     {
@@ -161,7 +161,7 @@ class SwaggerRetrunController
 
     /**
      * @route GET /demo9
-     * @return \Example\Entity\User[]
+     * @return \App\Entity\User[]
      */
     public function demo9() 
     {
@@ -183,7 +183,7 @@ class SwaggerRetrunController
     /**
      * @route GET /demo10
      * @return _object {
-     *    "code"： 1
+     *    "code": 1
      * }
      */
     public function demo10() 

@@ -37,15 +37,15 @@
 //     貌似也很少有需要获取实体数组的使用场景， 如果真有，循环 entity->fill($data) 也一样
 //     主要是复杂的SQL查询，ORM实现也太难了，我写不了
    
-namespace Example\Controller;
+namespace App\Controller;
 
 use PhpRest\ApiResult;
-use Example\Entity\Orm\User;
+use App\Entity\Orm\User;
 
 /**
- * ORM1
+ * ORM
  * 
- * @path /orm1
+ * @path /orm
  */
 class OrmController
 {
@@ -58,9 +58,9 @@ class OrmController
     /**
      * getById
      * 
-     * @route GET /{userId:\d+}
+     * @route GET /{userId}
      */
-    public function getById($userId = 1) 
+    public function getById(int $userId) 
     {        
         $user = $this->app->make(User::class);
         $user->findOne(['user_id' => $userId]);
@@ -75,8 +75,8 @@ class OrmController
      */
     public function create(User $user) 
     {
-        $ret = $user->insert();
-        return ApiResult::success(['userId' => $ret->id()]);
+        $res = $user->insert();
+        return ApiResult::success(['rowCount' => $res->rowCount(), 'userId' => $user->userId]);
     }
 
     /**
@@ -87,19 +87,19 @@ class OrmController
      */
     public function update(User $user) 
     { 
-        $ret = $user->update();
-        return ApiResult::assert($ret->rowCount() === 1, ['', '保存失败']);
+        $res = $user->update();
+        return ApiResult::assert($res->rowCount() === 1, ['', '保存失败']);
     }
 
     /**
      * delete
      * 
-     * @route DELETE /{userId:\d+}
+     * @route DELETE /{userId}
      */
-    public function delete($userId) 
+    public function delete(int $userId) 
     { 
         $user = $this->app->make(User::class);
-        $ret = $user->delete(['user_id' => $userId]);
+        $res = $user->delete(['user_id' => $userId]);
         return ApiResult::assert($res->rowCount() === 1, ['', '删除失败']);
     }
 }
