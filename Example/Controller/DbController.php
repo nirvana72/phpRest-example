@@ -27,13 +27,13 @@ class DbController
     /**
      * getById
      * 
-     * @route GET /{userId:\d+}
+     * @route GET /find/{userId}
      */
-    public function getById($userId = 1) 
-    {        
-        $row = $this->db->get('tmp_user', '*', ['user_id' => $userId]);
-        $row = \PhpRest\camelizeArrayKey($row);
-        return ApiResult::success($row);
+    public function getById(int $userId) 
+    {
+        // $row = $this->db->get('t_user', '*', ['user_id' => $userId]);
+        // $row = \PhpRest\camelizeArrayKey($row); // 把数据库里的下划线规则转成驼峰规则
+        // return ApiResult::success($row);
     }
 
     /**
@@ -43,11 +43,11 @@ class DbController
      * @param int $page
      * @param int $limit
      */
-    public function getList($page = 1, $limit = 10) 
+    public function getList(int $page = 1, int $limit = 10) 
     {        
         $start = ($page-1) * $limit;
-        $rows = $this->db->select('tmp_user', '*', ['limit' => [$start, $limit]]);
-        $rows = \PhpRest\camelizeArrayKey($rows); // 把数据库里的下划线规则转成驼峰规则
+        $rows = $this->db->select('t_user', '*', ['LIMIT' => [$start, $limit]]);
+        $rows = \PhpRest\camelizeArrayKey($rows);
         return ApiResult::success($rows);
     }
 
@@ -69,14 +69,15 @@ class DbController
             'password'   => $password,
             'write_time' => date('Y-m-d H:i:s')
         ];
-        $res = $this->db->insert('tmp_user', $data);
+        $res = $this->db->insert('t_user', $data);
         return ApiResult::assert($res->rowCount() === 1, ['', '添加失败']);
     }
 
     /**
      * update
      * 
-     * @route PUT /{userId:\d+}
+     * @route PUT /
+     * @param int    $userId
      * @param string $nickName
      * @param string $phone    {@rule regex=/^1[3456789]\d{9}$/}
      */

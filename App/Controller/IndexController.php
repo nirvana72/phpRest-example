@@ -38,8 +38,8 @@ class IndexController
     /**
      * @route GET /demo1
      */
-    public function demo1() 
+    public function demo1(int $p1) 
     {
-        return 'ok';
+        return $p1;
     }
 }

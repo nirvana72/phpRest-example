@@ -2,12 +2,9 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use PhpRest\ApiResult;
 
 /**
- * 参数绑定
- * 
- * 一个演示参数绑定的控制器
- * 
  * @path /params
  */
 class ParamsController
@@ -36,15 +33,18 @@ class ParamsController
     /**
      * demo3
      * 
-     * path rule see https://github.com/nikic/FastRoute
-     * 
      * @route GET /demo3/{id}
-     * @param string $id    id
      * @param string $token token {@bind headers.token}
      */
     public function demo3($id, $token) 
     {
-        // 同时指定path参数和 get/post参数， 优先取 path参数
+        // path参数 $id 默认是字符串
+        // 如果要验证类型可以在下面加一行(注意参数必需同名)
+        // @param int $id
+        // 因为同时指定path参数和 get/post参数， 优先取 path参数
+        // 虽然 https://github.com/nikic/FastRoute 也支持 /{id:\d+} 这样的写法
+        // 但最这样的uri格式与swagger 文档冲突， 故本框架不建议那样写（不使用swagger的话就无所谓了）
+        //
         // {@bind headers.token} 可从header 中取参
         // 
         // POST, PUT 请求， 参数默认为 {@bind request.xxx}
@@ -76,14 +76,28 @@ class ParamsController
      * @param dateTime  $p12  p12
      * @param ip        $p13  p13
      * @param string    $p14  p14 {@rule length=6}
-     * @param int       $p15  p15 {@rule min=1|max=6}
+     * @param int       $p15  p15 {@rule integer|min=1|max=6}
      * @param string    $p16  p16 {@rule in=red,blue,yellow}
+     * @param string    $p17  p17 {@rule regex=/^1[3456789]\d{9}$/}
      */
-    public function demo4($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16) {
+    public function demo4($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12, $p13, $p14, $p15, $p16, $p17) {
 
         // @param integer  $p3  p3   等同于  @param int    $p3  p3  {@rule integer}
         // @param alpha    $p7  p7   等同于  @param string $p7  p7  {@rule alpha}
         // @param dateTime $p12 p12  等同于  @param string $p12 p12 {@rule dateFormat=Y-m-d H:i:s}
+        //
+        // 注意 参数校验只是通过框架验证参数规则
+        // 由于php 是弱类型语言 
+        // // @param int $p1
+        //    function($p1)      // p1 不一定就是int型
+        //    function(int $p1)  // p1 肯定是 int
+        //
+        // 如果只写 function(int $p1) 也会添加$p1的integer 验证规则,所以
+        //  @param int $p1
+        //  function($p1)
+        //
+        //  function(int $p1)
+        // 两种写法是一样的效果， 但是只支持 int, float 自动添加验证规则
         $res = [
             'p1' => $p1, // abc
             'p2' => $p2, // 1
@@ -100,7 +114,8 @@ class ParamsController
             'p13' => $p13, // 127.0.0.1
             'p14' => $p14, // aaaaaa
             'p15' => $p15, // 4
-            'p16' => $p16  // red
+            'p16' => $p16, // red
+            'p17' => $p17  // 13913181371
         ];
         // \PhpRest\dump($user); // \PhpRest\dump方法来自 ThinkPhp框架，提供更友好的浏览器输出
         return ApiResult::success($res);
@@ -112,11 +127,11 @@ class ParamsController
      * 数组参数绑定
      * 
      * @route POST /demo5
-     * @param int[] $ary ary
+     * @param string[] $ary ary
      */
     public function demo5($ary) 
     {
-        // @param string[] $ary ary  必需提交一个数组
+        // @param string[] $ary ary  必需提交一个数组格式
         // @param int[]    $ary ary  必需提交一个全是整形的数组
         // @param ip[]     $ary ary  必需提交一个全是合法IP的数组
         // @param data[]   $ary ary  必需提交一个全是合法日期字符串的数组
