@@ -7,12 +7,6 @@ namespace App\Controller;
 class FileUploadController
 {
     /**
-     * @Inject
-     * @var \Psr\Log\LoggerInterface
-     */  
-    private $logger;
-
-    /**
      * @route POST /upload_file/{id}
      * @param $file1 第一个文件 {@bind files.file1}
      * @param $file2 第二个文件 {@bind files.file2}
@@ -24,8 +18,6 @@ class FileUploadController
         // see https://github.com/symfony/http-foundation/blob/5.x/File/UploadedFile.php
 
         // $file1 为 UploadedFile 实例
-
-        $this->logger->info('upaloading files');
         // $file1->move('/workspace/temp', 'aaa1.txt');
         // $file2->move('/workspace/temp', 'aaa2.txt');
         return $file1->getClientOriginalName();
