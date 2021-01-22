@@ -15,21 +15,16 @@ $app = Application::create(__DIR__.'/../config/config.php');
 // 加载路由
 $app->scanRoutesFromPath( __DIR__.'/../App/Controller', 'App\Controller');
 
-// 跨域支持
-$app->addGlobalHooks([ 
-    \PhpRest\Hook\CrosHook::class 
-]);
-
 // swagger
-if (Env::get('app.env') !== 'production') {
-    \PhpRest\Swagger\SwaggerHandler::register($app, 'App\Controller', function(&$swagger, $group) {
-            $api_key['type'] = 'apiKey';
-            $api_key['in']   = 'header';
-            $api_key['name'] = Env::get('jwt.name');
-            $swagger['securityDefinitions']['api_key'] = $api_key;
-        }
-    );
-}
+// if (Env::get('app.env') !== 'production') {
+//     \PhpRest\Swagger\SwaggerHandler::register($app, 'App\Controller', function(&$swagger, $group) {
+//             $api_key['type'] = 'apiKey';
+//             $api_key['in']   = 'header';
+//             $api_key['name'] = Env::get('jwt.name');
+//             $swagger['securityDefinitions']['api_key'] = $api_key;
+//         }
+//     );
+// }
 
 // 解析请求
 $app->dispatch();

@@ -49,7 +49,7 @@ class IndexController
         $appEnv  = Env::get('app.env');
         $host    = Env::get('app.host');
         $html  = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column">';
-        $html .= "<label style='font-size:1.5em;height:3em'>{$appName} [<span style='color:red'>{$appEnv}</span>] is working</label>";
+        $html .= "<label style='font-size:1.5em;height:3em'>😃 {$appName} [<span style='color:red'>{$appEnv}</span>] is working</label>";
         $html .= "<a target='_blank' href='http://swagger-ui.lan8.cn/?url=http://{$host}/swagger/api.json'>swagger</a>";
         $html .= '</div>';
         echo $html;

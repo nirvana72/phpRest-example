@@ -12,6 +12,18 @@ use PhpRest\ApiResult;
 class ExceptionHandler implements ExceptionHandlerInterface
 {
     /**
+     * @Inject
+     * @var \PhpRest\Application
+     */
+    private $app;
+
+    /**
+     * @Inject
+     * @var \Psr\Log\LoggerInterface
+     */  
+    private $logger;
+
+    /**
      * @param \Throwable $e
      * @return Response
      */
@@ -25,10 +37,10 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $status = Response::HTTP_BAD_REQUEST; // 400
         } elseif($e instanceof BadCodeException){
             $status = Response::HTTP_INTERNAL_SERVER_ERROR; // 500
+            $file = $e->getFile();
+            $line = $e->getLine();
         } elseif($e instanceof BadRequestException){
             $status = Response::HTTP_NOT_FOUND; // 404
-        } elseif($e instanceof AuthException){
-            $status = Response::HTTP_FORBIDDEN; // 403
         } elseif($e instanceof HttpException){
             $status = $e->getStatusCode();
         }
@@ -49,6 +61,10 @@ class ExceptionHandler implements ExceptionHandlerInterface
 
         $message = json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         
-        return new Response($message, $status, ['Content-Type'=>'application/json']);
+        $response = $this->app->make(Response::class);
+        $response->setContent($message);
+        $response->setStatusCode($status);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

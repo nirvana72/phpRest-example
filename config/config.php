@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Response;
 use PhpRest\Exception\ExceptionHandlerInterface;
 use PhpRest\Render\ResponseRenderInterface;
 use Psr\Container\ContainerInterface;
@@ -39,9 +40,21 @@ return [
     ],
 
     /************************************************************************************
+      跨域处理
+    ************************************************************************************/
+    Response::class => \DI\factory(function (ContainerInterface $c) {
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        $response->headers->set('Access-Control-Allow-Headers', '*');
+        $response->headers->set('Access-Control-Allow-Methods', '*');
+        $response->headers->set('Access-Control-Allow-Credentials', 'true');
+        return $response;
+    }),
+
+    /************************************************************************************
       自定义异常输出类
     /************************************************************************************/
-    ExceptionHandlerInterface::class => \DI\create(\App\Exception\ExceptionHandler::class),
+    ExceptionHandlerInterface::class => \DI\autowire(\App\Exception\ExceptionHandler::class),
 
     /************************************************************************************
       日志输出
