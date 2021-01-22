@@ -7,10 +7,7 @@
 // 但是PHP特点没什么必要重度使用ORM
 
 // 使用注意
-// 1.  orm 实体对象只能通过 $app->make() 创建， new 出来的无法生效
-//     因为orm对象内部需要注入一些必要对象
-
-// 2.  以下代码两种写法都可以正常插入数据库， 但 1 无法使用orm实体的验证规则
+// 1.  以下代码两种写法都可以正常插入数据库， 但 1 无法使用orm实体的验证规则
 //     $user = $this->app->make(User::class);
 //     $user->userId    = 1;
 //     $user->account   = 'nirvana72';
@@ -32,7 +29,7 @@
 
 //     具体使用哪种方式，视应场景决定
 
-// 3.  orm 只支持findOne, 不支持findList
+// 2.  orm 只支持findOne, 不支持findList
 //     因为如果是给前端数据返回， 直接返回关联数组也是一样的，反正最后都是json_encode， 大数组转换成实体对象数组也是个不小的消耗
 //     貌似也很少有需要获取实体数组的使用场景， 如果真有，循环 entity->fill($data) 也一样
 //     主要是复杂的SQL查询，ORM实现也太难了，我写不了
@@ -62,8 +59,7 @@ class OrmController
      */
     public function getById(int $userId) 
     {        
-        $user = $this->app->make(User::class);
-        $user->findOne(['user_id' => $userId]);
+        $user = User::findOne(['user_id' => $userId]);
         return ApiResult::success($user);
     }
 
@@ -98,8 +94,12 @@ class OrmController
      */
     public function delete(int $userId) 
     { 
-        $user = $this->app->make(User::class);
-        $res = $user->delete(['user_id' => $userId]);
+        // 也可以
+        // $user = new User();
+        // $user->userId = $userId;
+        // $res = $user->remove();
+        // 
+        $res = User::delete(['user_id' => $userId]);
         return ApiResult::assert($res->rowCount() === 1, ['', '删除失败']);
     }
 }
