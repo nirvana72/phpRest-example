@@ -9,6 +9,7 @@ composer install
 # 目录结构
 ~~~
 项目目录
+├── apache                         // docker 安装时的依赖
 ├── App
 │   ├── Controller                 // 控制器目录
 │   │   ├── IndexController.php    // 控制器
@@ -23,10 +24,10 @@ composer install
 │       ├── Hook1.php 
 │       ├── Hook2.php 
 │       └── ...
-├── client                        // 简易axios 客户端
 ├── config                        // 配置文件目录
 ├── logs                          // 日志文件目录
-├── public                     
+├── public
+│   ├── client                    // 简易axios 客户端
 │   └── index.php                 // 入口文件
 └── .env                          // 环境配置文件
 ~~~
@@ -41,6 +42,10 @@ composer install
     └── index.php                  // 入口文件
 ~~~
 
+# 在线示例
+[在线示例](http://phprest.nijia.online)
+
+[简易客户端](http://phprest.nijia.online/client/index.html)
 
 # 说明直接看代码
 [参数绑定](https://github.com/nirvana72/phpRest-example/blob/main/App/Controller/ParamsController.php)
