@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <div style="width:400px;margin: 50px;">
+    <label>ParamsController</label>
+    <table class="table">
+      <tr>
+        <td>GET</td>
+        <td>/params/demo1</td>
+        <td><button onclick="params_test('demo1')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/params/demo2</td>
+        <td><button onclick="params_test('demo2')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/params/demo3</td>
+        <td><button onclick="params_test('demo3')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/params/demo4</td>
+        <td><button onclick="params_test('demo4')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/params/demo5</td>
+        <td><button onclick="params_test('demo5')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/params/demo6</td>
+        <td><button onclick="params_test('demo6')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+    </table>
+
+    <label>HookController</label>
+    <table class="table">
+      <tr>
+        <td>GET</td>
+        <td>/hook/demo1</td>
+        <td><button onclick="hook_test('demo1')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/hook/demo2</td>
+        <td><button onclick="hook_test('demo2')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+    </table>
+
+    <label>EntityController</label>
+    <table class="table">
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo1</td>
+        <td><button onclick="entity_test('demo1')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo2</td>
+        <td><button onclick="entity_test('demo2')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo3</td>
+        <td><button onclick="entity_test('demo3')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo4</td>
+        <td><button onclick="entity_test('demo4')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo5</td>
+        <td><button onclick="entity_test('demo5')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/entity/demo6</td>
+        <td><button onclick="entity_test('demo6')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+    </table>
+
+    <label>DbController</label>
+    <table class="table">
+      <tr>
+        <td>GET</td>
+        <td>GET /db/find/{userId}</td>
+        <td><button onclick="db_test('getById')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/db/list</td>
+        <td><button onclick="db_test('getList')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/db/</td>
+        <td><button onclick="db_test('create')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>/db/</td>
+        <td><button onclick="db_test('update')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/db/{userId}</td>
+        <td><button onclick="db_test('delete')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+    </table>
+
+    <label>OrmController</label>
+    <table class="table">
+      <tr>
+        <td>GET</td>
+        <td>GET /orm/{userId}</td>
+        <td><button onclick="orm_test('getById')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/orm/</td>
+        <td><button onclick="orm_test('create')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>/orm/</td>
+        <td><button onclick="orm_test('update')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/orm/{userId}</td>
+        <td><button onclick="orm_test('delete')" class="btn btn-primary btn-sm">test</button></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="request.js"></script>
+<script>
+function params_test(name) {
+  switch(name) {
+    case 'demo1': {
+      request({ method: 'get', url: '/params/demo1', params: { p1: 'Fred' }});
+      break;
+    }
+    case 'demo2': {
+      request({ method: 'get', url: '/params/demo2', params: { p1: 'pp1', p2: 'a2', p3: 'b3' }});
+      break;
+    }
+    case 'demo3': {
+      request({ method: 'get', url: '/params/demo3/123'});
+      break;
+    }
+    case 'demo4': {
+      request({ method: 'get', url: '/params/demo4', params: { 
+        p1: 'abc', 
+        p2: 1, 
+        p3: 3,
+        p4: 64.4,
+        p5: '15279663@qq.com',
+        p6: 'http://www.163.com',
+        p7: 'ab',
+        p8: 'a142',
+        p9: 'a1_',
+        p10: '2020-11-11',
+        p11: '11:11:11',
+        p12: '2020-11-11 11:11:11',
+        p13: '127.0.0.1',
+        p14: 'aaaaaa',
+        p15: 4,
+        p16: 'red',
+        p17: '13913181371',
+      }});
+      break;
+    }
+    case 'demo5': {
+      request({ method: 'post', url: '/params/demo5', data: { ary: [1,2,3]}});
+      break;
+    }
+    case 'demo6': {
+      request({ method: 'get', url: '/params/demo6', params: { ary: [1,2,3]}});
+      break;
+    }
+  }
+}
+
+function hook_test(name) {
+  switch(name) {
+    case 'demo1': {
+      request({ method: 'get', url: '/hook/demo1'});
+      break;
+    }
+    case 'demo2': {
+      request({ method: 'get', url: '/hook/demo2'});
+      break;
+    }
+  }
+}
+
+function entity_test(name) {
+  switch(name) {
+    case 'demo1': {
+      request({ method: 'post', url: '/entity/demo1', data: {
+        user: {
+          id: 1, name: 'nijia', age: 18
+        }
+      }});
+      break;
+    }
+    case 'demo2': {
+      request({ method: 'post', url: '/entity/demo2', data: {
+        user: {
+          id: 1, name: 'nijia', age: 18
+        }
+      }});
+      break;
+    }
+    case 'demo3': {
+      request({ method: 'post', url: '/entity/demo3', data: {
+        user: {
+          id: 1, name: 'nijia', age: 18
+        },
+        info: {
+          id: 1, email: '15279663@qq.com'
+        }
+      }});
+      break;
+    }
+    case 'demo4': {
+      request({ method: 'post', url: '/entity/demo4', data: {
+        "company": {
+          "id": 1,
+          "name": "xxxx公司",
+          "employee": {
+            "id": 1,
+            "realName": "jack",
+            "companyId": 18
+          },
+          "order": {
+            "id": 1,
+            "code": "1234567a",
+            "orderInfo": {
+              "id": 123,
+              "desc": "info desc"
+            },
+            "orderOthers": [
+              {
+                "id": 1,
+                "ips": ['127.0.0.1', '127.0.0.2', '127.0.0.3'],
+                "nums": [1,2,3],
+              },
+              {
+                "id": 2,
+                "ips": ['127.0.1.1', '127.0.2.2'],
+                "nums": [1,2,3,4,5,6],
+              }
+            ]
+          }
+        }
+      }});
+      break;
+    }
+    case 'demo5': {
+      request({ method: 'post', url: '/entity/demo5', data: {
+        "users": [
+          {
+            "id": 1,
+            "name": "aaa",
+            "age": 16
+          },
+          {
+            "id": 2,
+            "name": "bbb",
+            "age": 17
+          },
+          {
+            "id": 3,
+            "name": "ccc",
+            "age": 18
+          }
+        ]
+      }});
+      break;
+    }
+    case 'demo6': {
+      request({ method: 'post', url: '/entity/demo6', data: {
+        son: {
+          id: 1, name: 'son', age: 16
+        }
+      }});
+      break;
+    }
+  }
+}
+
+function db_test(name) {
+  switch(name) {
+    case 'getById': {
+      const userId = prompt('userId', 0);
+      request({ method: 'get', url: '/db/find/' + userId});
+      break;
+    }
+    case 'getList': {
+      request({ method: 'get', url: '/db/list'});
+      break;
+    }
+    case 'create': {
+      request({ method: 'post', url: '/db/', data: {
+        account: 'nirvana' + Math.floor(Math.random() * 1000),
+        nickName: 'nickname' + Math.floor(Math.random() * 1000),
+        phone: '13913181' + Math.floor(Math.random() * 1000),
+        password: '1312311'
+      }});
+      break;
+    }
+    case 'update': {
+      const userId = prompt('userId', 0);
+      const nickName = prompt('nickName', 'nickName');
+      const phone = prompt('phone', '13913181371');
+      request({ method: 'put', url: '/db/', data: {
+        userId, nickName, phone
+      }});
+      break;
+    }
+    case 'delete': {
+      const userId = prompt('userId', 0);
+      request({ method: 'delete', url: '/db/' + userId});
+      break;
+    }
+  }
+}
+
+function orm_test(name) {
+  switch(name) {
+    case 'getById': {
+      const userId = prompt('userId', 0);
+      request({ method: 'get', url: '/orm/' + userId});
+      break;
+    }
+    case 'create': {
+      request({ method: 'post', url: '/orm/', data: {
+        user: {
+          account: 'nirvana' + Math.floor(Math.random() * 1000),
+          nickName: 'nickname' + Math.floor(Math.random() * 1000),
+          phone: '13913181' + Math.floor(Math.random() * 1000),
+          password: '1312311',
+          writeTime: '2021-01-20 00:00:00'
+        }
+      }});
+      break;
+    }
+    case 'update': {
+      const userId = prompt('userId', 0);
+      const nickName = prompt('nickName', 'nickName');
+      const phone = prompt('phone', '13913181371');
+      request({ method: 'put', url: '/orm/', data: {
+        user: {
+          userId, nickName, phone
+        }
+      }});
+      break;
+    }
+    case 'delete': {
+      const userId = prompt('userId', 0);
+      request({ method: 'delete', url: '/orm/' + userId});
+      break;
+    }
+  }
+}
+</script>
