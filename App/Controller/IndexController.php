@@ -42,12 +42,17 @@ use PhpRest\Utils\EnvHelper as Env;
 class IndexController
 {
     /**
+     * @Inject("App.name")
+     */
+    private $appName;
+
+    /**
      * @route GET /
      * @swagger false
      */
     public function index() 
     {
-        $appName = Env::get('app.name');
+        $appName = $this->appName; // Env::get('app.name');
         $appEnv  = Env::get('app.env');
         $host    = Env::get('app.host');
         $html  = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column">';

@@ -8,7 +8,7 @@
 
 // 使用注意
 // 1.  以下代码两种写法都可以正常插入数据库， 但 1 无法使用orm实体的验证规则
-//     $user = $this->app->make(User::class);
+//     $user = new User();
 //     $user->userId    = 1;
 //     $user->account   = 'nirvana72';
 //     $user->nickName  = 'nijia';
@@ -18,6 +18,7 @@
 //     $user->insert();
 
 //     以下代码可使orm的验证规则生效
+//     $user = new User();
 //     $user->fill([
 //         'userId'    => 1,
 //         'account'   => 'nirvana72',
@@ -46,12 +47,6 @@ use App\Entity\Orm\User;
  */
 class OrmController
 {
-    /**
-     * @Inject
-     * @var \PhpRest\Application
-     */
-    private $app;
-
     /**
      * getById
      * 
