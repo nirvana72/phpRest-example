@@ -2,7 +2,7 @@
 
 ~~~
 git clone https://github.com/nirvana72/phpRest-example.git
-cd 项目目录
+cd phpRest-example
 composer install
 ~~~
 
