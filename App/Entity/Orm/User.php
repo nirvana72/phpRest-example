@@ -24,8 +24,7 @@ class User
 
     /**
      * @var int
-     * @pk
-     * @auto
+     * @pk auto
      */
     public $userId;
 

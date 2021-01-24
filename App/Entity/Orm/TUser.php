@@ -11,8 +11,7 @@ class TUser
     use EnableOrm;
 
     /**
-     * @pk
-     * @auto
+     * @pk auto
      */
     public $userId;
 
