@@ -19,7 +19,22 @@ return [
         'author'  => 'nijia',
         'email'   => '15279663@qq.com',
         'schemes' => ['http'],
-        'version' => '1.0.1'
+        'version' => '1.0.1',
+        'template' => [
+            'default' => [
+                'ret' => 1,
+                'msg' => 'success',
+                'data' => '#schema'
+            ],
+            'pager' => [
+                'ret' => 1,
+                'msg' => 'success',
+                'data' => [
+                    'total' => 1,
+                    'list' => '#schema'
+                ]
+            ]
+        ]
     ],
     
     /************************************************************************************

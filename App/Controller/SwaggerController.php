@@ -35,198 +35,92 @@ class SwaggerController
      * 
      * @route GET /demo1
      * @param int    $p1 p1描述
-     * @param string $p2 p2描述
-     * @return object {
-     *      "uid": 1,
-     *      "uname": "string"
-     * }
+     * @param string $p2 p2描述 
+     * @return void
      */
     public function demo1($p1, $p2 = 'p2') 
     {
-        return ['uid' => 1, 'uname' => 'aaa'];
+        return 'string';
     }
 
     /**
-     * @route POST /demo2
-     * @return void
+     * @route GET /demo2
      */
-    public function demo2() 
+    public function demo2(int $p1, $p2 = 'p2') 
     {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success"
-        //  }
-        return 'OK';
+        // 如果不考虑swagger文档, demo1 和 demo2 是一样的.
+        return 'string';
     }
 
+
     /**
+     * 指定swagger返回格式
+     * 
      * @route GET /demo3
-     * @return number
+     * @return object {
+     *   "name": "jack",
+     *   "age": 18
+     * }
      */
     public function demo3() 
     {
+        // @return 支持的写法有
+
+        // @return int
+        // @return int[]
+
+        // @return float
+        // @return float[]
+
+        // @return string
+        // @return string[]
+
+        // 返回手写对象
+        // @return object {
+        //     "name": "jack",
+        //     "age": 18,
+        //     "info": [
+        //         {
+        //             "aaa": "string",
+        //             "bbb": [1]
+        //         }
+        //     ]
+        // }
+        // 对象数组
+        // @return object[] { ... }
+
+        // 实体映射
+        // @return App\Entity\User
+        // @return App\Entity\User[]
+
+        return ['name' => 'jack', 'age' => 18];
+    }
+
+    /**
+     * 返回格式使用模版
+     * 
+     * @route GET /demo4
+     * @return App\Entity\User #template=default
+     */
+    public function demo4() 
+    {        
         // swagger 返回展示
         // {
         //    "ret": 1,
         //    "msg": "success",
-        //    "data" : 1
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo4
-     * @return number[]
-     */
-    public function demo4() 
-    {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data" : [1]
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo5
-     * @return string
-     */
-    public function demo5() 
-    {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": "string" 
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo6
-     * @return string[]
-     */
-    public function demo6() 
-    {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": ["string"] 
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo7
-     * @return object {
-     *    "name": "string",
-     *    "nick": "昵称",
-     *    "age": 1
-     * }
-     */
-    public function demo7() 
-    {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": {
-        //        "name": "string",
-        //        "nick": "昵称",
-        //        "age": 1
+        //    "data" : {
+        //       "name": "string",
+        //       "age": 18
         //    }
         //  }
-        return "OK";
-    }
 
-    /**
-     * @route GET /demo8
-     * @return object[] {
-     *    "name": "string",
-     *    "nick": "昵称",
-     *    "age": 1
-     * }
-     */
-    public function demo8() 
-    {
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": [
-        //        {
-        //            "name": "string",
-        //            "nick": "昵称",
-        //            "age": 1
-        //        }
-        //     ]
-        //  }
-        return "OK";
-    }
+        // 关于模版格式查看 config.php 文件
 
-    /**
-     * @route GET /demo9
-     * @return \App\Entity\User
-     */
-    public function demo9() 
-    {
-        // 同时支持实体类返回
-        // 
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": {
-        //       "id": "string",
-        //       "name": "string",
-        //       "info": "string [email]"
-        //     }
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo10
-     * @return \App\Entity\User[]
-     */
-    public function demo10() 
-    {
-        // 返回实体类也支持数组
-        // 
-        // swagger 返回展示
-        //  {
-        //    "ret": 1,
-        //    "msg": "success",
-        //    "data": [{
-        //       "id": "string",
-        //       "name": "string",
-        //       "info": "string [email]"
-        //     }]
-        //  }
-        return "OK";
-    }
-
-    /**
-     * @route GET /demo11
-     * @return _object {
-     *    "code": 1
-     * }
-     */
-    public function demo11() 
-    {
-        // @return 注解默认会在外面套一层 { "ret": 1, "msg": "success", data: "xxx" }
-        // 如果某些接口返回不想有这层, 只要在返回对象前加下划线 _
-        // 
-        // 支持 _number, _string, _string[],  _\Example\Entity\User
-        //
-        // swagger 返回展示
-        //  {
-        //    "code": 1
-        //  }
-        return "OK";
+        // 更多模板写法
+        // @return int #template=pager
+        // @return App\Entity\User[] #template=default
+        // @return object { ... } #template=pager
+        // ...
+        return 1;
     }
 }
