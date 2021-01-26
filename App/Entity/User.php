@@ -17,7 +17,7 @@
 //      *
 //      * @field user_id               [可选 指定字段名, 默认等于变量名, 规则同 @table]
 //      * @pk auto                     [可选 指定字段为主键, ORM update|delete 时拼接 where 条件] [auto 可选 指定为自增主键]
-//      * @var int                     [可选 指定类型, 格式同参数说明的 @param]
+//      * @var int                     [可选 指定类型, 格式同参数说明的 @param, 如果是基础数据类型可直接在属性前声明,等同于 public int $id ]
 //      * @rule min=1|max=100          [可选 指定验证规则, 格式同参数说明的 @rule]
 //      */
 //     public $id = 1;                 [这个当然必选了, 但必需是非静态的 public 变量, 其它变量不会被映射]
@@ -34,12 +34,12 @@ namespace App\Entity;
 
 class User
 {
-    public $id = 1;
+    public int $id = 1;
 
     /**
      * 姓名
      */
-    public $name;
+    public string $name;
 
     /**
      * @var int

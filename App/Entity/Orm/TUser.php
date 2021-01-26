@@ -13,15 +13,15 @@ class TUser
     /**
      * @pk auto
      */
-    public $userId;
+    public int $userId;
 
-    public $account;
+    public string $account;
 
-    public $nickName;
+    public string $nickName;
 
-    public $password;
+    public string $password;
     
-    public $phone;
+    public string $phone;
 
-    public $writeTime;
+    public string $writeTime;
 }
