@@ -77,14 +77,18 @@ class SwaggerController
 
         // 返回手写对象
         // @return object {
-        //     "name": "jack",
-        //     "age": 18,
-        //     "info": [
-        //         {
-        //             "aaa": "string",
-        //             "bbb": [1]
-        //         }
-        //     ]
+        //     "ret": 1,
+        //     "msg": "success",
+        //     "data": {
+        //         "name": "jack",
+        //         "age": 18,
+        //         "info": [
+        //             {
+        //                 "aaa": "string",
+        //                 "bbb": [1]
+        //             }
+        //         ]    
+        //     }      
         // }
         // 对象数组
         // @return object[] { ... }
@@ -100,7 +104,7 @@ class SwaggerController
      * 返回格式使用模版
      * 
      * @route GET /demo4
-     * @return App\Entity\User #template=default
+     * @return \App\Entity\User #template=pager
      */
     public function demo4() 
     {        
@@ -109,18 +113,33 @@ class SwaggerController
         //    "ret": 1,
         //    "msg": "success",
         //    "data" : {
-        //       "name": "string",
-        //       "age": 18
+        //       "total": 1,
+        //       "list": [
+        //         ...
+        //       ]
         //    }
         //  }
 
         // 关于模版格式查看 config.php 文件
 
         // 更多模板写法
-        // @return int #template=pager
-        // @return App\Entity\User[] #template=default
+        // @return int #template=default  // 默认会使用default模版，#template=default 可以省略
+        // @return App\Entity\User[] #template=pager
         // @return object { ... } #template=pager
         // ...
+        return 1;
+    }
+
+    /**
+     * 不使用模版
+     * 
+     * @route GET /demo5
+     * @return int #template=null
+     */
+    public function demo5() 
+    {
+        // 框架自动会应用config中配置的swagger default 模版， 除非没定义default
+        // 如果不希望返回内容应用任何模版， 使用 #template=null
         return 1;
     }
 }
