@@ -15,7 +15,31 @@
 //   检查中文 : 中文 ， 经常会忽略
 //
 // 如果你希望某个api不在swagger中展示，比如test接口...
-// 可以添加一个@swagger false 注解
+// 可以添加一个@swagger hide 注解
+
+
+// 如果需要增加swagger的security登录验证, 需要添加以下几步
+// 1. 增加config中的swagger配置
+// 'swagger' => [
+//   ...
+//   'security' => true,
+//   ...
+// ],
+
+// 2. 加了以上配置，所有接口默认都需要 security 验证
+//    如有例外接口, 在function上添加经下注解
+//    @swagger !security
+
+// 3. securityDefinitions 默认配置为
+//     api_key:
+//       type: apiKey
+//       name: Authorization
+//       in: header
+//   如需修改, 则在/public/index.php 中修改
+//   SwaggerHandler::register('/swagger/api.json', function(&$swagger) {
+//       $swagger['info']['description'] = 'phpRest-admin 系统API';
+//       $swagger['securityDefinitions']['api_key']['name'] = 'token';
+//   });
 
 namespace App\Controller;
 
