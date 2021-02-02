@@ -125,12 +125,30 @@ class ParamsController
     /**
      * demo5
      * 
-     * 数组参数绑定
+     * 使用规则模板
      * 
      * @route POST /demo5
+     * @param string $p1 p1 {@rule template=code}
+     */
+    public function demo5($p1) 
+    {   
+        // 如果某个规则在很多地方都使用, 可以在config.php中定义一个模板
+        // 'App.paramRules' => [ // 这个名字不能变
+        //     'phone' => 'regex=/^1[3456789]\d{9}$/',
+        //     'code ' => 'integer|min=1|max=6'
+        // ],
+        return ApiResult::success($p1);
+    }
+
+    /**
+     * demo6
+     * 
+     * 数组参数绑定
+     * 
+     * @route POST /demo6
      * @param string[] $ary ary
      */
-    public function demo5($ary) 
+    public function demo6($ary) 
     {
         // @param string[] $ary ary  必需提交一个数组格式
         // @param int[]    $ary ary  必需提交一个全是整形的数组
@@ -148,9 +166,9 @@ class ParamsController
      * 别忘了 use Symfony\Component\HttpFoundation\Request;
      * Request: https://symfony.com/doc/current/components/http_foundation.html#request
      * 
-     * @route GET /demo6
+     * @route GET /demo7
      */
-    public function demo6(Request $request) 
+    public function demo7(Request $request) 
     {
         return $request->query->all();
     }
