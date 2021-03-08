@@ -1,5 +1,5 @@
 const request = axios.create({
-  baseURL: 'http://www.phpRest.local',
+  baseURL: 'http://phprest.nijia.online',
   timeout: 60000
 })
 
