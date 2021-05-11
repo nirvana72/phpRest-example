@@ -16,6 +16,9 @@ composer install
 │   │   └── ...
 │   ├── Entity                     // 实体类
 │   │   └── ...
+│   ├── Event                      // 事件目录
+│   │   ├── XXXListener.php        // 事件
+│   │   └── ...
 │   ├── Exception                  // 异常处理目录
 │   │   ├── ExceptionHandler.php   // 自定义异常处理文件
 │   │   ├── XXXException.php       // 自定义异常
@@ -61,3 +64,5 @@ composer install
 [swagger](https://github.com/nirvana72/phpRest-example/blob/main/App/Controller/SwaggerController.php)
 
 [文件上传](https://github.com/nirvana72/phpRest-example/blob/main/App/Controller/FileUploadController.php)
+
+[事件驱动](https://github.com/nirvana72/phpRest-example/blob/main/App/Controller/EventController.php)
