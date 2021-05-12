@@ -12,17 +12,20 @@ use PhpRest\Event\EventTrigger;
 class EventController
 {
     /**
+     * 事件传参
+     * 
      * @route GET /something_delete
      */
     public function somethingDelete()
     {
         $params = ['user' => ['name' => 'nij', 'age' => 12]];
-        // 触发事件并传参
         EventTrigger::on('SomeThingDelete', $params);
         return 'event.somethingDelete';
     }
 
     /**
+     * 触发多个事件
+     * 
      * @route GET /user_event
      */
     public function userEvent()
@@ -30,5 +33,16 @@ class EventController
         EventTrigger::on('UserEventA');
         EventTrigger::on('UserEventB');
         return 'event.userEvent';
+    }
+
+    /**
+     * 异步事件处理
+     * 
+     * @route GET /async_event
+     */
+    public function asyncEvent()
+    {
+        EventTrigger::on('AsyncEvent');
+        return 'event.AsyncEvent';
     }
 }

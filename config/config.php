@@ -94,7 +94,7 @@ return [
         $dateFormat = "Y-m-d H:i:s";
         $output = "%datetime% > %level_name% > %message% %context% %extra%\n";
         $formatter = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
-        $stream = new \Monolog\Handler\StreamHandler($logPath, \Monolog\Logger::ERROR);
+        $stream = new \Monolog\Handler\StreamHandler($logPath, \Monolog\Logger::DEBUG);
         $stream->setFormatter($formatter);
         $monoLog = new \Monolog\Logger($c->get('App.name'));
         $monoLog->pushHandler($stream);
