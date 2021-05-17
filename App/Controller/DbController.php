@@ -43,6 +43,7 @@ class DbController
     public function getById(int $userId) 
     {
         $row = $this->db->get('t_user', '*', ['user_id' => $userId]);
+        if ($row === false || $row === null) \PhpRest\abort(new \Exception('记录不存在'));
         $row = \PhpRest\camelizeArrayKey($row); // 把数据库里的下划线规则转成驼峰规则
         return ApiResult::success($row);
     }

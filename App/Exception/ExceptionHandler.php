@@ -22,7 +22,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
      * @param \Throwable $e
      * @return Response
      */
-    public function render(\Throwable $e)
+    public function render(\Throwable $e): Response
     {
         $response = Application::getInstance()->make(Response::class);
         // $ret = 0 - abs($e->getCode());

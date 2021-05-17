@@ -17,7 +17,7 @@ class TestHook1 implements HookInterface
      * @param callable $next
      * @return Response
      */
-    public function handle(Request $request, callable $next)
+    public function handle(Request $request, callable $next): Response
     {
         echo 'before TestHook1, ';
         $response = $next($request);

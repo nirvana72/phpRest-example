@@ -12,7 +12,7 @@ class TestHook2 implements HookInterface
      * @param callable $next
      * @return Response
      */
-    public function handle(Request $request, callable $next)
+    public function handle(Request $request, callable $next): Response
     {
         echo 'before TestHook2, ';
         return $next($request);
