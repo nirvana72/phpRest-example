@@ -10,7 +10,7 @@ class UserYListener implements EventInterface
         return ['UserEventB'];
     }
 
-    public function handle($params = []): void
+    public function handle(string $event, $params = []): void
     {
         echo 'UserYListener.handle';
         var_dump($params);

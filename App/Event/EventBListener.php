@@ -10,9 +10,13 @@ class EventBListener implements EventInterface
         return ['SomeThingDelete'];
     }
 
-    public function handle($params = []): void
+    public function handle(string $event, $params = []): void
     {
         echo 'EventBListener.handle';
+        echo "\r\n";
+        echo "event = {$event}";
+        echo "\r\n";
+        echo 'params = ';
         var_dump($params);
     }
 }

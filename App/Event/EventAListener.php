@@ -12,9 +12,13 @@ class EventAListener implements EventInterface
     }
 
     // 执行事件，事件触发参考 \App\Controller\EventController.php
-    public function handle($params = []): void
+    public function handle(string $event, $params = []): void
     {
         echo 'EventAListener.handle';
+        echo "\r\n";
+        echo "event = {$event}";
+        echo "\r\n";
+        echo 'params = ';
         var_dump($params);
     }
 }

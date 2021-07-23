@@ -10,7 +10,7 @@ class UserXListener implements EventInterface
         return ['UserEventA', 'UserEventB'];
     }
 
-    public function handle($params = []): void
+    public function handle(string $event, $params = []): void
     {
         echo 'UserXListener.handle';
         if (is_array($params) && count($params) > 0) {

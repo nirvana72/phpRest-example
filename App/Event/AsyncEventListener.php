@@ -18,7 +18,7 @@ class AsyncEventListener implements EventInterface
         return ['AsyncEvent'];
     }
 
-    public function handle($params = []): void
+    public function handle(string $event, $params = []): void
     {
         // 异步处理
         AsyncHelper::getInstance()->run(function() {
